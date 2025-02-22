@@ -39,14 +39,14 @@
         ACCELEROMETER_RESET
     };
 
-    static Context application_context; // Armazena o contexto global da aplicação
+    static Context context; // Armazena o contexto global da aplicação
     
     /**
      * @brief Interface para que a camada 'Interface' atualize o contexto global da aplicação com novos dados
      * 
-     * @param context Endereço da variável que armazena o contexto global da aplicação 
+     * @param context Cópia atualizada do contexto global da aplicação 
      */
-    void update_context(Context* context);
+    void update_context(Context context);
 
     /**
      * @brief Obtém uma cópia do contexto global da aplicação, pode ser utilizada por todas as camadas da aplicação
