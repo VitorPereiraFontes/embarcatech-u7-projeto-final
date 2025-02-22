@@ -1,3 +1,11 @@
+/**
+ * @file ADXL335.h
+ * @author Vítor Pereira Fontes
+ * @date 2025-02-22
+ * 
+ * @brief Arquivo de cabeçalho para as funções que irão interagir diretamente com o acelerômetro ADXL335
+ */
+
 #ifndef _ADXL335_H
     #define _ADXL335_H
 
@@ -18,6 +26,8 @@
      * @brief Lê a aceleração da gravidade em um eixo escolhido.
      *
      * Esta função lê o valor de tensão de uma das saídas do módulo ADXL335 através do ADC da Raspberry Pi Pico W.
+     * 
+     * @param adc ADC que deve ser utilizado para a leitura.
      *
      * @return Aceleração da gravidade no eixo escolhido.
      */
