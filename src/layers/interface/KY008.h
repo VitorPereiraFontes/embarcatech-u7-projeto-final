@@ -12,6 +12,9 @@
 
     #include "pico/stdlib.h"
 
+    #define X_axis_laser_GPIO 21
+    #define Y_axis_laser_GPIO 22
+
     /**
      * @brief Altera o nivel lógico da GPIO conectada ao pino gate do MOSFET
      * 
@@ -27,4 +30,9 @@
      * @return Verdadeiro ou falso
      */
     bool read_signal(uint8_t gpio);
+
+    /**
+     * @brief Inicializa e configura o bloco KY008
+     */
+    void initialize_KY008_block();
 #endif
