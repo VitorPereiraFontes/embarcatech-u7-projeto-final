@@ -24,7 +24,6 @@
         // Variáveis que armazenam dados
         float ZX_angle; /** Ângulo entre os eixos X e Z */
         float XY_angle; /** Ângulo entre os eixos X e Y */
-        bool button_a_state; /** True - Botão pressionado | False - botão solto */
         bool button_b_state;  /** True - Botão pressionado | False - botão solto */
         bool X_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
         bool Y_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
@@ -36,7 +35,6 @@
     typedef enum{
         LASER,
         ACCELEROMETER,
-        PUSH_BUTTON_A,
         PUSH_BUTTON_B
     } Component;
 
@@ -49,7 +47,6 @@
         LASER_TOGGLE_BOTH,
         ACCELEROMETER_CALIBRATE,
         ACCELEROMETER_RESET,
-        PUSH_BUTTON_A_READ_STATE,
         PUSH_BUTTON_B_READ_STATE
     } Action;
 
@@ -62,7 +59,6 @@
         .resetting = false,
         .ZX_angle = 0.0,
         .XY_angle = 0.0,
-        .button_a_state = false,
         .button_b_state = false,
         .X_axis_guide_line = true,
         .Y_axis_guide_line = true
