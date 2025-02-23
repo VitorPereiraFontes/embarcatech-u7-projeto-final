@@ -22,8 +22,8 @@
         bool resetting; /** True - Comando para resetar os valores de calibragem do acelerômetro disparado | False - Nenhum comando disparado */
 
         // Variáveis que armazenam dados
-        float ZX_angle; /** Ângulo entre os eixos X e Z */
-        float XY_angle; /** Ângulo entre os eixos X e Y */
+        float ZX_angle; /** Ângulo entre os eixos Z e X */
+        float ZY_angle; /** Ângulo entre os eixos Z e Y */
         bool button_b_state;  /** True - Botão pressionado | False - botão solto */
         bool X_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
         bool Y_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
@@ -58,7 +58,7 @@
         .calibrating = false,
         .resetting = false,
         .ZX_angle = 0.0,
-        .XY_angle = 0.0,
+        .ZY_angle = 0.0,
         .button_b_state = false,
         .X_axis_guide_line = true,
         .Y_axis_guide_line = true
