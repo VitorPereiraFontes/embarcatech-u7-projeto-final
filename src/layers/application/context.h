@@ -13,12 +13,19 @@
      * @brief Estrutura que define o formato do contexto da aplicação
      */
     typedef struct context{
-        bool X_axis_laser; /** Linha guia do eixo X habilitada ou desabilitada */
-        bool Y_axis_laser; /** Linha guia do eixo Y habilitada ou desabilitada */
+        // Variáveis que verificam se um comando foi acionado
+        bool toggle_X_axis_guide_line; /** True - Comando para inverter estado da linha disparado | False - Nenhum comando disparado */
+        bool toggle_Y_axis_guide_line; /** True - Comando para inverter estado da linha disparado | False - Nenhum comando disparado */
+        bool calibrating; /** True - Comando para calibrar o acelerômetro disparado | False - Nenhum comando disparado */
+        bool resetting; /** True - Comando para resetar os valores de calibragem do acelerômetro disparado | False - Nenhum comando disparado */
+
+        // Variáveis que armazenam dados
         float ZX_angle; /** Ângulo entre os eixos X e Z */
         float XY_angle; /** Ângulo entre os eixos X e Y */
-        bool calibrating; /** Indica se o comando para calibar o nível foi disparado */
-        bool resetting; /** Indica se o comando para resetar a calibragem do nível foi disparado */
+        bool button_a_state; /** True - Botão pressionado | False - botão solto */
+        bool button_b_state;  /** True - Botão pressionado | False - botão solto */
+        bool X_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
+        bool Y_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
     } Context;
 
     /**
@@ -26,7 +33,9 @@
      */
     enum Component{
         LASER,
-        ACCELEROMETER
+        ACCELEROMETER,
+        PUSH_BUTTON_A,
+        PUSH_BUTTON_B
     };
 
     /**
@@ -36,7 +45,9 @@
         LASER_TOGGLE_X,
         LASER_TOGGLE_Y,
         ACCELEROMETER_CALIBRATE,
-        ACCELEROMETER_RESET
+        ACCELEROMETER_RESET,
+        PUSH_BUTTON_A_READ_STATE,
+        PUSH_BUTTON_B_READ_STATE
     };
 
     static Context context; // Armazena o contexto global da aplicação
