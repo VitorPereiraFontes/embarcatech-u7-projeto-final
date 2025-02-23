@@ -32,4 +32,14 @@
      * @return Aceleração da gravidade no eixo escolhido.
      */
     uint16_t read_acceleration(ADC adc);
+
+    /**
+     * @brief Configura e inicializa o módulo
+     */
+    uint16_t setup_ADXL335_module(ADC adc);
+
+    /**
+     * @brief Lê os dados do sensor e atuliza o contexto global da aplicação
+     */
+    void run_ADXL335_module();
 #endif
