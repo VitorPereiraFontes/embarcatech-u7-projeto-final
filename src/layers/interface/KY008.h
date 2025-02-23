@@ -34,5 +34,10 @@
     /**
      * @brief Inicializa e configura o bloco KY008
      */
-    void initialize_KY008_block();
+    void setup_KY008_block();
+
+    /**
+     * @brief Atualiza o bloco KY008 com os dados do contexto global da aplicação
+     */
+    void run_KY008_block();
 #endif
