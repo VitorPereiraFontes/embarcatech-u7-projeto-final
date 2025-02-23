@@ -8,6 +8,7 @@
  */
 #ifndef _CONTEXT_H
     #define _CONTEXT_H
+    #include "pico/stdlib.h"
 
     /**
      * @brief Estrutura que define o formato do contexto da aplicação
@@ -16,6 +17,7 @@
         // Variáveis que verificam se um comando foi acionado
         bool toggle_X_axis_guide_line; /** True - Comando para inverter estado da linha disparado | False - Nenhum comando disparado */
         bool toggle_Y_axis_guide_line; /** True - Comando para inverter estado da linha disparado | False - Nenhum comando disparado */
+        bool toggle_both_guide_lines; /** True - Comando para inverter estado das linhas disparado | False - Nenhum comando disparado */
         bool calibrating; /** True - Comando para calibrar o acelerômetro disparado | False - Nenhum comando disparado */
         bool resetting; /** True - Comando para resetar os valores de calibragem do acelerômetro disparado | False - Nenhum comando disparado */
 
@@ -31,33 +33,47 @@
     /**
      * @brief Enumeração dos componentes acessíveis pela camada 'Presentation'
      */
-    enum Component{
+    typedef enum{
         LASER,
         ACCELEROMETER,
         PUSH_BUTTON_A,
         PUSH_BUTTON_B
-    };
+    } Component;
 
     /**
      * @brief Enumeração das ações disponíveis para os componentes acessíveis pela camada 'Presentation'
      */
-    enum Action{
+    typedef enum{
         LASER_TOGGLE_X,
         LASER_TOGGLE_Y,
+        LASER_TOGGLE_BOTH,
         ACCELEROMETER_CALIBRATE,
         ACCELEROMETER_RESET,
         PUSH_BUTTON_A_READ_STATE,
         PUSH_BUTTON_B_READ_STATE
-    };
+    } Action;
 
-    static Context context; // Armazena o contexto global da aplicação
+    // Armazena o contexto global da aplicação
+    static Context context = {
+        .toggle_X_axis_guide_line = false, 
+        .toggle_Y_axis_guide_line = false,
+        .toggle_both_guide_lines = false,
+        .calibrating = false,
+        .resetting = false,
+        .ZX_angle = 0.0,
+        .XY_angle = 0.0,
+        .button_a_state = false,
+        .button_b_state = false,
+        .X_axis_guide_line = true,
+        .Y_axis_guide_line = true
+    };
     
     /**
      * @brief Interface para que a camada 'Interface' atualize o contexto global da aplicação com novos dados
      * 
      * @param context Cópia atualizada do contexto global da aplicação 
      */
-    void update_context(Context context);
+    void update_context(Context updated_context);
 
     /**
      * @brief Obtém uma cópia do contexto global da aplicação, pode ser utilizada por todas as camadas da aplicação
