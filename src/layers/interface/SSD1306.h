@@ -74,7 +74,7 @@
    * @param zx_angle Ângulo entre o eixo espacial Z e X
    * @param zy_angle Ângulo entre o eixo espacial Z e Y
    */
-  void draw_data_screen(uint8_t zx_angle, uint8_t zy_angle);
+  void draw_data_screen(float zx_angle, float zy_angle);
 
   /**
    * @brief Desenha a tela de informe de reset na calibração
