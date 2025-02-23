@@ -6,8 +6,15 @@
  * OLED SSD1306
  */
 
-#include "ssd1306.h"
-#include "font.h"
+#include "SSD1306.h"
+#include "src/layers/application/context.h"
+#include <stdio.h>
+#include <string.h>
+
+/**
+ * @brief Estrutura de dados que armazena o contexto atual do display
+ */
+ssd1306_t display;
 
 void ssd1306_init(ssd1306_t *ssd, uint8_t width, uint8_t height, bool external_vcc, uint8_t address, i2c_inst_t *i2c) {
   ssd->width = width;
@@ -174,6 +181,10 @@ void ssd1306_draw_char(ssd1306_t *ssd, char c, uint8_t x, uint8_t y)
     index = (c - '0' + 1) * 8; // Adiciona o deslocamento necessário
   }else if(c >= 'a' && c <= 'z'){
     index = (c - 'a' + 37) * 8; // Para letras minúsculas
+  }else if(c == '.'){
+    index = 505;
+  }else if(c == ':'){
+    index = 512;
   }
   
   for (uint8_t i = 0; i < 8; ++i)
@@ -203,4 +214,53 @@ void ssd1306_draw_string(ssd1306_t *ssd, const char *str, uint8_t x, uint8_t y)
       break;
     }
   }
+}
+
+void clear(){
+  ssd1306_fill(&display, false);
+}
+
+void draw_data_screen(float zx_angle, float zy_angle){
+  char zx_value[20],zy_value[20];
+
+  sprintf(zx_value,"ZX: %.2f",zx_angle);
+  sprintf(zy_value,"ZY: %.2f",zy_angle);
+
+  ssd1306_rect(&display,0,0,WIDTH-1,HEIGHT-1,true,false);
+
+  ssd1306_draw_string(&display, "INCLINACAO", ((WIDTH - 1)/2) - (5 * 8), 5);
+
+  ssd1306_hline(&display,0,WIDTH-2,17, true);
+
+  ssd1306_draw_string(&display,zx_value,((WIDTH - 1)/2) - (4 * 8),29);
+
+  ssd1306_draw_string(&display,zy_value,((WIDTH - 1)/2) - (4 * 8),41);
+}
+
+void setup_SSD1306_block(){
+  i2c_init(I2C_PORT, OLED_DISPLAY_CLOCK_FREQUENCY);
+  gpio_set_function(OLED_DISPLAY_SDA_GPIO,GPIO_FUNC_I2C);
+  gpio_set_function(OLED_DISPLAY_SCL_GPIO,GPIO_FUNC_I2C);
+  gpio_pull_up(OLED_DISPLAY_SCL_GPIO);
+  gpio_pull_up(OLED_DISPLAY_SDA_GPIO);
+
+  ssd1306_init(&display, WIDTH, HEIGHT, false, OLED_DISPLAY_I2C_ADDRESS, I2C_PORT);
+  ssd1306_config(&display);
+  ssd1306_send_data(&display);
+}
+
+void run_SSD1306_block(){
+  clear();
+
+  Context current_context = get_context();
+
+  if(context.calibrating){
+
+  }else if(context.resetting){
+
+  }else{
+    draw_data_screen(context.ZX_angle,context.ZY_angle);
+  }
+
+  ssd1306_send_data(&display);
 }
