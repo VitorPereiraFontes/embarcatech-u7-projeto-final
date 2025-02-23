@@ -11,6 +11,10 @@
 
     #include "pico/stdlib.h"
 
+    #define X_axis_GPIO 26
+    #define Y_axis_GPIO 27
+    #define Z_axis_GPIO 28
+
     /*
      * Enumeração que representa as entradas no multiplexador do ADC do RP2040.
      * Cada constante representa uma entrada no multiplexador.
@@ -36,7 +40,7 @@
     /**
      * @brief Configura e inicializa o módulo
      */
-    uint16_t setup_ADXL335_module(ADC adc);
+    void setup_ADXL335_module();
 
     /**
      * @brief Lê os dados do sensor e atuliza o contexto global da aplicação
