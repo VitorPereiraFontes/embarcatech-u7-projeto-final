@@ -27,6 +27,9 @@
         bool button_b_state;  /** True - Botão pressionado | False - botão solto */
         bool X_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
         bool Y_axis_guide_line; /** True - Linha guia ativa | False - Linha guia desativada */
+        float Y_axis_acceleration; /** Aceleração no eixo Y */
+        float X_axis_acceleration; /** Aceleração no eixo X */
+        float Z_axis_acceleration; /** Aceleração no eixo Z */
     } Context;
 
     /**
@@ -61,7 +64,10 @@
         .ZY_angle = 0.0,
         .button_b_state = false,
         .X_axis_guide_line = true,
-        .Y_axis_guide_line = true
+        .Y_axis_guide_line = true,
+        .Y_axis_acceleration = 0,
+        .X_axis_acceleration = 0,
+        .Z_axis_acceleration = 0
     };
     
     /**
