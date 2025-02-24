@@ -223,8 +223,8 @@ void clear(){
 void draw_data_screen(float zx_angle, float zy_angle){
   char zx_value[20],zy_value[20];
 
-  sprintf(zx_value,"ZX: %.2f",zx_angle);
-  sprintf(zy_value,"ZY: %.2f",zy_angle);
+  sprintf(zx_value,"Roll: %.2f",zx_angle);
+  sprintf(zy_value,"Pitch: %.2f",zy_angle);
 
   ssd1306_rect(&display,0,0,WIDTH-1,HEIGHT-1,true,false);
 
@@ -232,9 +232,9 @@ void draw_data_screen(float zx_angle, float zy_angle){
 
   ssd1306_hline(&display,0,WIDTH-2,17, true);
 
-  ssd1306_draw_string(&display,zx_value,((WIDTH - 1)/2) - (4 * 8),29);
+  ssd1306_draw_string(&display,zx_value,((WIDTH - 1)/2) - (6 * 8),29);
 
-  ssd1306_draw_string(&display,zy_value,((WIDTH - 1)/2) - (4 * 8),41);
+  ssd1306_draw_string(&display,zy_value,((WIDTH - 1)/2) - (6 * 8),41);
 }
 
 void setup_SSD1306_block(){
@@ -254,12 +254,12 @@ void run_SSD1306_block(){
 
   Context current_context = get_context();
 
-  if(context.calibrating){
+  if(current_context.calibrating){
 
-  }else if(context.resetting){
+  }else if(current_context.resetting){
 
   }else{
-    draw_data_screen(context.ZX_angle,context.ZY_angle);
+    draw_data_screen(current_context.roll,current_context.pitch);
   }
 
   ssd1306_send_data(&display);
