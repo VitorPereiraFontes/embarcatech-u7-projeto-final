@@ -6,7 +6,13 @@
  * @brief Arquivo de cabeçalho para as funções principais da aplicação, que irão controlar efetivamente os 
  * demais componentes. Abarca a definição das GPIO's e configurações utilizadas para cada componente.
  */
+#ifndef _CORE_H
+    #define _CORE_H
 
-#ifndef _APPLICATION_H
-    #define _APPLICATION_H
+    /**
+     * @brief Realiza o processamento dos dados advindos do acelerômetro
+     *
+     * Esta função converte os valores lidos pelo acelerômetro em ângulos de rotação (pitch e roll)
+     */
+    void process_ADXL335_data();
 #endif
