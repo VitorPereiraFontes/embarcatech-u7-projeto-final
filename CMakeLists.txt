@@ -37,6 +37,13 @@ pico_sdk_init()
 
 add_executable(embarcatech-u7-projeto-final 
     src/main.c
+    src/layers/presentation/button.c
+    src/layers/application/context.c
+    src/layers/application/core.c
+    src/layers/interface/ADXL335.c
+    src/layers/interface/KY008.c
+    src/layers/interface/push_button.c
+    src/layers/interface/SSD1306.c
 )
 
 pico_set_program_name(embarcatech-u7-projeto-final "embarcatech-u7-projeto-final")
@@ -57,6 +64,9 @@ target_include_directories(embarcatech-u7-projeto-final PRIVATE
 )
 
 # Add any user requested libraries
-target_link_libraries(embarcatech-u7-projeto-final)
+target_link_libraries(embarcatech-u7-projeto-final
+    hardware_i2c
+    hardware_adc
+)
 
 pico_add_extra_outputs(embarcatech-u7-projeto-final)
