@@ -185,6 +185,8 @@ void ssd1306_draw_char(ssd1306_t *ssd, char c, uint8_t x, uint8_t y)
     index = 505;
   }else if(c == ':'){
     index = 512;
+  }else if(c == '-'){
+    index = 519;
   }
   
   for (uint8_t i = 0; i < 8; ++i)
